@@ -95,6 +95,8 @@ const data = [
   Bileşeniniz, argümanı haberleri içeren dizi olarak alan bir fonksiyon olacak,
   ve aşağıdaki gibi görünen bir DOM düğümü döndürecek:
 
+  
+
   <div class="article">
     <h2>{haber başlığı}</h2>
     <p class="tarih">{haber tarihi}</p>
@@ -115,3 +117,56 @@ const data = [
   Adım 5: Veri dizisine yeni haber nesnesi eklemeyi deneyin. Diğer verilerle aynı yapıda olmasına dikkat edin.
   Eklediğiniz yeni haberi görmek için sayfayı yenileyin.
 */
+
+
+const haberlerDiv = document.querySelector(".articles");
+
+
+function haberYapici(haberler){
+
+
+   const dynamicNodeList = haberler.map((haber)=>{
+
+    const expandButton = document.createElement("button");
+    expandButton.classList.add("expandButton");
+    expandButton.textContent="+";
+
+   const haberDiv=document.createElement("div");
+   haberDiv.classList.add("article");
+
+   const haberbaslik = document.createElement("h2");
+   const habertarih = document.createElement("p");
+   habertarih.classList.add("tarih");
+
+   haberbaslik.textContent=haber.baslik;
+   habertarih.textContent=haber.tarih;
+
+   const ilkParagraf = document.createElement("p");
+   const ikinciParagraf= document.createElement("p");
+   const ucuncuParagraf=document.createElement("p");
+
+   ilkParagraf.textContent=haber.ilkParagraf;
+   ikinciParagraf.textContent=haber.ikinciParagraf;
+   ucuncuParagraf.textContent=haber.ucuncuParagraf;
+
+   const button = document.createElement("button");
+   button.classList.add("expandButton");
+   button.textContent="+";
+
+   haberDiv.append(haberbaslik,habertarih,ilkParagraf,ikinciParagraf,ucuncuParagraf,expandButton);
+
+
+   expandButton.addEventListener("click",() =>{
+    haberDiv.classList.toggle("article-open");
+   })
+
+   haberlerDiv.appendChild(haberDiv);
+
+  //return haberDiv;
+  });
+
+  return dynamicNodeList;
+
+}
+
+ haberYapici(data);
